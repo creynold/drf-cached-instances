@@ -1,3 +1,10 @@
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+    OPEN := xdg-open
+else
+    OPEN := open
+endif
+
 .PHONY: clean-pyc clean-build clean-test clean-pyc clean docs
 
 help:
@@ -51,12 +58,12 @@ coverage:
 	coverage run --source drf_cached_instances setup.py test
 	coverage report -m
 	coverage html
-	open htmlcov/index.html
+	$(OPEN) htmlcov/index.html
 
 docs:
 	$(MAKE) -C docs clean
 	$(MAKE) -C docs html
-	open docs/_build/html/index.html
+	$(OPEN) docs/_build/html/index.html
 
 release: clean
 	python setup.py sdist bdist_wheel upload

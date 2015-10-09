@@ -49,3 +49,6 @@ docs/_build/*
 # Static files
 static/*
 !static/.keep
+
+# Vim files
+*.swp
